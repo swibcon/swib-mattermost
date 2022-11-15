@@ -1,0 +1,24 @@
+test_run: true
+create_ws_channels: false
+
+create_facilitators_channel: false
+ws_facilitators_channel: 
+  name: "ws-facilitators"
+  display_name: "Worksop-Facilitators"
+  purpose: "Channel for communication and questions between workshop facilitators"
+  header: ""
+  type: "P"
+
+add_participants: false
+add_facilitators: false
+
+channel_update: false
+event_filter:
+  - Full Conference
+  - nows
+  - nowl
+
+test_team: ""
+swib_team: ""
+
+path_to_data: ""
