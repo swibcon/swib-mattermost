@@ -1,6 +1,6 @@
 import requests
 
-from config import TEAM_ID, LOGIN_ID, PW, config
+from config import TEAM_ID, config
 from mattermost_commons import auth_headers, get_channel_id
 
 

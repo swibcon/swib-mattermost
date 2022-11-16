@@ -6,7 +6,7 @@ AUTH_URL = "https://swib22.collochat.de/api/v4/users/login"
 GET_CHANNEL_BY_NAME = "https://swib22.collochat.de/api/v4/teams/{team_id}/channels/name/{channel_name}"
 GET_USER_IDS_PER_MAIL = "https://swib22.collochat.de/api/v4/users/email/{email}"
 ADD_USER_TO_CHANNEL = "https://swib22.collochat.de/api/v4/channels/{channel_id}/members"
-UPDATE_CHANNEL_ROLE = "https://swib22.collochat.de/api/v4/channels/{channel_id}/members/{user_id}/roles"
+UPDATE_CHANNEL_ROLE = "https://swib22.collochat.de/api/v4/channels/{channel_id}/members/{user_id}/schemeRoles"
 
 
 def get_token():
@@ -53,14 +53,15 @@ def add_user_to_channel(user_id: str, channel_id: str):
         print(r.text)
 
 
-def update_channel_roles(user_id: str, channel_id: str, channel_role: str):
+def update_channel_role(user_id: str, channel_id: str, admin_user: bool = False):
     r = requests.put(UPDATE_CHANNEL_ROLE.replace("{channel_id}", channel_id).replace("{user_id}", user_id),
                       headers=auth_headers,
                       json={
-        "roles": channel_role
-    }
-    )
+            "scheme_admin": admin_user,
+            "scheme_user": True
+            })
+
     if r.status_code != 200:
         print(
-            f"Something went wrong while changing role of {user_id} in channel {channel_id} to role {channel_role}:")
+            f"Something went wrong while changing role of {user_id} in channel {channel_id} (admin_role {admin_user})")
         print(r.text)
